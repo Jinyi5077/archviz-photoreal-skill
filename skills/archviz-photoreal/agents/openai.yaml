@@ -1,0 +1,4 @@
+interface:
+  display_name: "建筑超写实渲染"
+  short_description: "识别主图与后期通道，保留几何位置并统一多视角材质的超写实渲染"
+  default_prompt: "使用 $archviz-photoreal 读取主图和后期通道，建立几何约束与跨视角材质台账，并为每张图编写超写实提示词。"
