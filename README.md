@@ -12,15 +12,46 @@
 
 ## 安装
 
-本仓库为私有仓库时，需要 GitHub 访问权限。Windows 使用已登录的 GitHub CLI：
+这是公开仓库，可直接克隆或下载，无需 GitHub 登录、访问令牌或 GitHub CLI。
+
+### 方式一：让 Codex 安装
+
+在 Codex 中发送：
+
+```text
+使用 $skill-installer 安装：
+https://github.com/Jinyi5077/archviz-photoreal-skill/tree/main/skills/archviz-photoreal
+```
+
+### 方式二：Windows 使用 Git
+
+已安装 Git 时，在准备存放仓库的目录运行：
 
 ```powershell
-gh repo clone Jinyi5077/archviz-photoreal-skill
+git clone https://github.com/Jinyi5077/archviz-photoreal-skill.git
 cd archviz-photoreal-skill
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-安装到 `$CODEX_HOME/skills/archviz-photoreal`；未设置 CODEX_HOME 时使用 `~/.codex/skills/archviz-photoreal`。不覆盖已有技能。安装后在下一轮消息可使用：
+### 方式三：Windows 下载 ZIP
+
+没有 Git 也可以安装：
+
+1. [下载 main 分支 ZIP](https://github.com/Jinyi5077/archviz-photoreal-skill/archive/refs/heads/main.zip) 并解压。
+2. 在解压后的 `archviz-photoreal-skill-main` 目录打开 PowerShell。
+3. 运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+Windows 安装脚本会将技能复制到 `$CODEX_HOME/skills/archviz-photoreal`；未设置 CODEX_HOME 时使用 `~/.codex/skills/archviz-photoreal`。目标目录已存在时会停止，不覆盖已有版本。仓库更新后可先用 `git pull --ff-only` 更新克隆目录；已安装的技能不会自动同步。
+
+macOS/Linux：克隆或解压后，将 `skills/archviz-photoreal` 整个目录复制到 `${CODEX_HOME:-$HOME/.codex}/skills/` 下；已有同名目录时先检查，不直接覆盖。
+
+## 使用
+
+安装后在下一轮消息可调用：
 
 ```text
 使用 $archviz-photoreal 读取这个目录的主图和 AI 后期通道，
@@ -28,9 +59,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 此阶段只编写提示词，确认后再生成。
 ```
 
-也可让 Codex 的 skill-installer 安装 `Jinyi5077/archviz-photoreal-skill` 中的 `skills/archviz-photoreal` 路径。私有仓库需安装器可用的 GitHub 认证；无需把 token 粘贴到对话。
+同一机位的输入放在同一目录，例如：
 
-macOS/Linux：先用 `gh repo clone` 克隆，再将 `skills/archviz-photoreal` 整个目录复制到 `${CODEX_HOME:-$HOME/.codex}/skills/` 下；已有同名目录时先人工检查，不直接覆盖。
+```text
+场景 2.png
+场景 2_AI_Albedo.png
+场景 2_AI_Normal.png
+场景 2_AI_Material.png
+```
+
+主图也可以使用“图片.png”等其他名称。告诉 Codex 主图范围、输出目录、需要保留的结构和材质要求；补充已确认的场地事实，例如某个桥墩位于干燥河岸上。技能会将这些事实记录到当前项目，避免误套到其他项目。
 
 ## 文件清点工具（可选）
 
